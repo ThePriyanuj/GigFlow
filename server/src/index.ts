@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import type { AddressInfo } from 'net';
 import swaggerUi from 'swagger-ui-express';
@@ -20,7 +20,7 @@ const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173')
   .map(url => url.trim());
 
 app.use(cors({
-  origin: (origin, callback) => {
+  origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
     // Allow requests with no origin (mobile apps, curl, etc.)
     if (!origin) return callback(null, true);
     if (allowedOrigins.some(allowed => origin.startsWith(allowed) || allowed === '*')) {
@@ -44,7 +44,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
 }));
 
 // Root route for easier manual verification in the browser
-app.get('/', (_req, res) => {
+app.get('/', (_req: Request, res: Response) => {
   res.json({
     success: true,
     message: 'GigFlow API is running',
@@ -62,12 +62,12 @@ app.use('/api/auth', authRoutes);
 app.use('/api/leads', leadRoutes);
 
 // Health check
-app.get('/api/health', (_req, res) => {
+app.get('/api/health', (_req: Request, res: Response) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString(), service: 'GigFlow API' });
 });
 
 // 404 handler
-app.use((_req, res) => {
+app.use((_req: Request, res: Response) => {
   res.status(404).json({ success: false, error: 'Route not found' });
 });
 

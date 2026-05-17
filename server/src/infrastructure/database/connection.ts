@@ -18,7 +18,8 @@ export const connectDatabase = async (): Promise<void> => {
       console.log('   ⚠️  Data will not persist between restarts');
     } else {
       try {
-        await mongoose.connect(mongoUri, { serverSelectionTimeoutMS: 5000 });
+        const options: any = { serverSelectionTimeoutMS: 5000 };
+        await mongoose.connect(mongoUri, options);
         console.log('✅ MongoDB connected successfully');
       } catch (err) {
         if (isServerless) {
@@ -41,7 +42,7 @@ export const connectDatabase = async (): Promise<void> => {
     process.exit(1);
   }
 
-  mongoose.connection.on('error', (err) => {
+  mongoose.connection.on('error', (err: any) => {
     console.error('MongoDB connection error:', err);
   });
 
