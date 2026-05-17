@@ -1,0 +1,48 @@
+version: "2"
+type: frontend
+tech_stack:
+  - TypeScript
+  - React
+  - TailwindCSS
+  - Vite
+routes:
+  - path: /login
+    file: src/pages/LoginPage.tsx
+    auth_required: false
+    description: User login page
+  - path: /
+    file: src/pages/DashboardPage.tsx
+    auth_required: true
+    description: Main dashboard page
+features:
+  - name: User Login
+    description: Login with email and password credentials
+    files:
+      - src/pages/LoginPage.tsx
+      - src/context/AuthContext.tsx
+    entry_route: /login
+    user_interactions:
+      - Fill email input field
+      - Fill password input field
+      - Click Login button to submit
+      - See error message on invalid credentials
+    api_calls:
+      - method: POST
+        endpoint: /api/auth/login
+    auth_required: false
+  - name: View Dashboard
+    description: Dashboard showing leads and stats
+    files:
+      - src/pages/DashboardPage.tsx
+    entry_route: /
+    user_interactions:
+      - View stats
+      - View leads
+      - Edit leads
+    api_calls:
+      - method: GET
+        endpoint: /api/leads/stats
+      - method: GET
+        endpoint: /api/leads
+    auth_required: true
+known_limitations: []

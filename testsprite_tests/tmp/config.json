@@ -1,0 +1,17 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:5173",
+  "executionArgs": {
+    "projectName": "ServiceHive",
+    "projectPath": "d:\\PROJECTS\\ServiceHive",
+    "testIds": [],
+    "additionalInstruction": "",
+    "serverMode": "development",
+    "envs": {
+      "API_KEY": "sk-user-0l8UUuq66jo6mKFuRiiHqPtaeKmxbx-rypeFrAnXP096XWSo9IoW8PUjbdXaTzjbThUhiNl8wrGvV0na3onOdxIXWgcZY4g30e8UR4oDNFVD6s-Yl1emsd3_3a_2Hll-6G0"
+    }
+  },
+  "serverPort": 61259
+}
